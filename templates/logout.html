@@ -1,0 +1,28 @@
+{% extends "base.html" %}
+
+{% block subtitle %}
+
+{% endblock %}
+
+{% block content %}
+    <div class="hero-unit">
+        Do you want to logout?
+    </div>
+    <form method="post" class="button-form">
+        <button class="btn btn-large btn-primary"
+                tabindex="1"
+                type="submit">
+            Yes
+        </button>
+    </form>
+    <form action="{{uri_for(handlers.main_page)}}"
+          method="get"
+          class="button-form">
+        <button class="btn btn-large btn-primary"
+                tabindex="2"
+                type="submit">
+            No, go to main page
+        </button>
+    </form>
+
+{% endblock %}

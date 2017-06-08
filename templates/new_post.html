@@ -1,0 +1,103 @@
+{% extends "base.html" %}
+
+{% block subtitle %}
+    {{action}} Snippet
+{% endblock %}
+
+{% block content %}
+{% if error %}
+<table class="table table-condensed top-table">
+    <tr class="error">
+        <td class="centered">
+            Error. Please try again.
+        </td>
+    </tr>
+</table>
+{% endif %}
+<form method="post" class="inline">
+    <div class="span6">
+        <h4>Old way:</h4>
+        <textarea name="old" class="full-width full-height"
+                  tabindex="1">{{old}}</textarea>
+    </div>
+    <div class="span6 pull-right">
+        <h4>New way:</h4>
+        <textarea name="new" class="full-width half-height"
+                  tabindex="2">{{new}}</textarea>
+        <h4>Description:</h4>
+        <textarea name="description" class="full-width half-height"
+                  tabindex="3">{{description}}</textarea>
+    </div>
+    <div class="clear"></div>
+    <div class="inline left-margin">
+        <button class="btn btn-large btn-primary" tabindex="4" type="submit">
+            Save
+        </button>
+    </div>
+</form>
+{% if post_id %}
+    <form action="{{uri_for(handlers.blog_post, post_id=post_id)}}"
+          method="get"
+          class="inline left-margin">
+        <button class="btn btn-large btn-primary"
+                tabindex="5"
+                type="submit">
+            Cancel
+        </button>
+    </form>
+{% endif %}
+<div class="span12">
+    <div class="hero-unit">
+       For consistency with the rest of the content on the site, please follow the rules when adding your snippet:
+    </div>
+</div>
+<div class="span6">
+<pre class="prettyprint linenums">
+&lt;style&gt;
+#dont #forget {
+    you-can: 'mix-html';
+    and: css;
+}
+&lt;/style&gt;
+
+&lt;div class="location"&gt;
+    old monstrous code
+    goes in this field
+&lt;/div&gt;
+
+&lt;span&gt;
+    do your best
+    to prevent
+    line-wrap
+    but dont go crazy =)
+&lt;/span&gt;
+
+&lt;!-- make the snippet
+     self descriptive --&gt;
+</pre>
+</div>
+<div class="span6 pull-right">
+    <pre class="prettyprint linenums-right">
+#modern #shorter #code,
+.goes .here {
+    awesome: yes;
+}
+    </pre>
+    <p class="lead">
+        This field is optional, use it to make some additional explanation why, how, or when
+    </p>
+</div>
+
+<!-- <form method="post" action="newpost_save">
+<div class="title">Title:</div>
+<input type="text" name="subject" value="{{subject}}">
+<div class="text">Text:</div>
+<textarea name="content">{{content}}</textarea>
+{% if error: %}
+<div class="error">Both title and text are needed</div>
+{% endif %}
+
+<hr>
+<input type="submit">
+</form> -->
+{% endblock %}

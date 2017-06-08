@@ -1,0 +1,115 @@
+{% extends "base.html" %}
+
+{% block subtitle %}
+    {% set author_key = entry.key.parent() %}
+    {% set mutable = author_key == request.user%}
+    {% if not mutable %}
+        {{author_key.get().username}}'s Snippet
+    {% endif %}
+    {% if mutable %}
+        Your Snippet
+    {% endif %}
+
+{% endblock %}
+
+{% block content %}
+    {% set post_id = entry.key.urlsafe() %}
+    {% set author_key = entry.key.parent() %}
+    {% set mutable = author_key == request.user %}
+    {% set url_post = uri_for(handlers.blog_post,
+                              post_id=post_id) %}
+    {% set url_edit_post = uri_for(handlers.blog_post_edit,
+                                   post_id=post_id) %}
+    {% set url_delete_post = uri_for(handlers.blog_post_delete,
+                                     post_id=post_id) %}
+    <div class="span12">
+        <div class="post-date">
+            {{entry.created | datetimeformat}}
+        </div>
+    </div>
+    <div class="span6">
+        <pre class="prettyprint linenums">{{entry.old}}</pre>
+    </div>
+    <div class="span6 pull-right">
+        <pre class="prettyprint linenums-right
+                    no-bottom-margin">{{entry.new}}</pre>
+        {% if entry.description %}
+            <p class="lead no-top-margin">
+                {{entry.description}}
+            </p>
+        {% endif %}
+    </div>
+    <div class="span12">
+        <iframe class="one-line-iframe"
+                src={{uri_for(handlers.likes_iframe,
+                              post_id=post_id)}}>
+        </iframe>
+    </div>
+    {% if mutable: %}
+    <div class="span12">
+        <form action="{{url_edit_post}}" method="get"
+              class="button-form">
+            <button class="btn btn-large btn-primary"
+                    tabindex="1"
+                    type="submit">
+                Edit
+            </button>
+        </form>
+        <form action="{{url_delete_post}}" method="get"
+              class="button-form">
+            <button class="btn btn-large btn-primary"
+                    tabindex="2"
+                    type="submit">
+                Delete
+            </button>
+        </form>
+        <div class="clear"></div>
+    </div>
+    {% endif %}
+    {% if request.user %}
+        <div class="span12">
+            <h4>Write a comment:</h4>
+            <form action="{{uri_for(handlers.comment_save,
+                                    post_id=post_id)}}"
+                  method="post">
+                <textarea name="message" class="full-width"
+                          tabindex="3"></textarea>
+                <button class="btn btn-large btn-primary pull-right"
+                        tabindex="4"
+                        type="submit">
+                    Comment
+                </button>
+            </form>
+        </div>
+    {% endif %}
+    {% if comments: %}
+        <div class="span12">
+        {% for comment in comments %}
+        {% set deletable = comment.user == request.user %}
+        {% set comment_id = comment.key.urlsafe() %}
+            <div class="">
+                <h3 class="inline">
+                    {% if not deletable %}
+                        {{comment.user.get().username}}
+                    {% endif %}
+                    {% if deletable %}
+                        you
+                    {% endif %}
+                    wrote
+                </h3>
+                {% if deletable %}
+                    <a href="{{uri_for(handlers.comment_delete,
+                                       post_id=post_id,
+                                       comment_id=comment_id)}}">
+                        delete comment
+                    </a>
+                {% endif %}
+                <p class="lead no-top-margin">
+                    {{comment.message}}
+                </p>
+            </div>
+        {% endfor %}
+        </div>
+    {% endif %}
+
+{% endblock %}

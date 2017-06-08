@@ -1,0 +1,68 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+    <div class="jumbotron">
+        <h1>Way-too-old<br>blog</h1>
+        <p class="lead">
+          Let's share examples of how the Web has changed in the past years.
+          Post a snippet of the code that you had to use to gain some functionality,
+          and its modern variant too. Don't worry about being very original --
+          only the latest 10 posts are displayed.
+          And don't forget to comment and `like` your favorites!
+        </p>
+        <a class="btn btn-large btn-primary" href="/blog/newpost">
+            Add a Snippet
+        </a>
+    </div>
+
+    <hr>
+
+    {% if entries: %}
+        {% for entry in entries: %}
+            {% set post_id = entry.key.urlsafe() %}
+            {% set author_key = entry.key.parent() %}
+            {% set url_post = uri_for(handlers.blog_post,
+                                      post_id=post_id) %}
+            <div class="row-fluid bottom-margin">
+                <div class="span6">
+                    <a href="{{ url_post }}" class="post-title">
+                        {% if author_key != request.user %}
+                            by {{author_key.get().username}}:
+                        {% endif %}
+                        {% if author_key == request.user %}
+                            by you:
+                        {% endif %}
+                    </a>
+                </div>
+                <div class="span6">
+                    <div class="post-date">
+                        {{entry.created | datetimeformat}}
+                    </div>
+                </div>
+                <div class="span6">
+                    <pre class="prettyprint linenums">{{entry.old}}</pre>
+                </div>
+                <div class="span6">
+                    <pre class="prettyprint linenums-right
+                                no-bottom-margin">{{entry.new}}</pre>
+                    {% if entry.description %}
+                        <p class="lead no-top-margin">
+                            {{entry.description}}
+                        </p>
+                    {% endif %}
+                </div>
+                <div class="span12">
+                    Comments: {{entry.comments}}
+                    <iframe class="one-line-iframe"
+                            src={{uri_for(handlers.likes_iframe,
+                                          post_id=post_id)}}>
+                    </iframe>
+                </div>
+            </div>
+
+
+        {% endfor %}
+    {% endif %}
+
+{% endblock %}

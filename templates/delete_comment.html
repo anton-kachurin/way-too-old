@@ -1,0 +1,28 @@
+{% extends "base.html" %}
+
+{% block subtitle %}
+    Delete Comment
+{% endblock %}
+
+{% block content %}
+    <div class="hero-unit">
+        Are you sure? This action cannot be reverted.
+    </div>
+    <form method="post" class="button-form">
+        <button class="btn btn-large btn-primary"
+                tabindex="1"
+                type="submit">
+            Delete
+        </button>
+    </form>
+    <form action="{{uri_for(handlers.blog_post, post_id=post_id)}}"
+          method="get"
+          class="button-form">
+        <button class="btn btn-large btn-primary"
+                tabindex="2"
+                type="submit">
+            Cancel
+        </button>
+    </form>
+    <div class="clear"></div>
+{% endblock %}

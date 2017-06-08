@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>Way-too-old likes</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+        <!-- Bootstrap -->
+        <link rel="stylesheet" media="screen"
+              href="/static/css/bootstrap.min.css">
+        <link rel="stylesheet" media="screen"
+              href="/static/css/bootstrap-theme.min.css">
+        <link rel="stylesheet" media="screen"
+              href="/static/css/bootstrap-responsive.css">
+
+        <!-- Custom CSS -->
+        <link rel="stylesheet" media="screen"
+              href="/static/css/iframe.css">
+    </head>
+    <body>
+        Likes: {{total_likes}}
+        {% if user and not same_user %}
+            {% if not user_likes %}
+                <form method="post" class="inline-form"
+                      action="{{uri_for(handlers.add_like,
+                                         post_id=post_id)}}">
+                    <button type="submit" class="btn-link">like</button>
+                </form>
+            {% endif %}
+            {% if user_likes %}
+            <form method="post" class="inline-form"
+                  action="{{uri_for(handlers.remove_like,
+                                     post_id=post_id)}}">
+                <button type="submit" class="btn-link">unlike</button>
+            </form>
+            {% endif %}
+        {% endif %}
+    </body>
+</html>

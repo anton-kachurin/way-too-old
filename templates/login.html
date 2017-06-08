@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Way-too-old</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+        <!-- Bootstrap -->
+        <link rel="stylesheet" media="screen"
+              href="/static/css/bootstrap.min.css">
+        <link rel="stylesheet" media="screen"
+              href="/static/css/bootstrap-theme.min.css">
+        <link rel="stylesheet" media="screen"
+              href="/static/css/login.css">
+
+        <!-- JS libraries-->
+        <script src="/static/js/jquery.js"></script>
+        <script src="/static/js/bootstrap.min.js"></script>
+
+        <!-- Custom JS -->
+        <script src="/static/js/options.js"></script>
+    </head>
+    <body>
+        <div class="container">
+            {% if error or required %}
+            <table class="table table-condensed top-table">
+                <tr class="error">
+                    <td class="centered">
+                        {% if error %}
+                            Error. Please try again.
+                        {% endif %}
+                        {% if required %}
+                            Login is required before taking this action
+                        {% endif %}
+                    </td>
+                </tr>
+            </table>
+            {% endif %}
+            <form class="form-signin" method="post">
+                <h2 class="form-signin-heading">Please sign in</h2>
+                <input type="text" class="input-block-level large-input"
+                       tabindex="1"
+                       name="username"
+                       placeholder="Username">
+
+                <input type="password" class="input-block-level large-input"
+                       tabindex="2"
+                       name="password"
+                       placeholder="Password">
+
+                <button class="btn btn-large btn-primary"
+                        tabindex="3"
+                        type="submit">
+                    Sign in
+                </button>
+            </form>
+            <div class="centered">
+                <a href="{{uri_for(handlers.signup_page)}}">Signup</a> if you don't have an account
+            </div>
+        </div>
+    </body>
+</html>

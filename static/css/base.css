@@ -1,0 +1,144 @@
+body {
+    visibility: hidden;
+}
+
+.clear {
+    clear: both;
+}
+
+.container-narrow {
+    margin: 0 auto;
+    max-width: 720px;
+}
+
+.container-narrow > hr {
+    margin: 30px 0;
+}
+
+.jumbotron {
+    text-align: center;
+}
+
+.jumbotron h1 {
+    font-size: 72px;
+    line-height: 1;
+}
+
+.jumbotron .btn {
+    font-size: 21px;
+    padding: 14px 24px;
+}
+
+.marketing {
+    margin: 60px 0;
+}
+
+.marketing p + h4 {
+    margin-top: 28px;
+}
+
+.nav-pills > .active > a:hover {
+    background-color: #a50;
+}
+
+.greeting {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.greeting .username {
+    color: black;
+}
+
+.full-width {
+    box-sizing: border-box;
+    padding: 5px;
+    width: 100%;
+    font-size: 21px;
+}
+
+.full-height {
+    height: 352px;
+    overflow-y: auto;
+}
+
+.half-height {
+    height: 155px;
+    overflow-y: auto;
+}
+
+.breadcrumb {
+    float: left;
+    background-color: #000084;
+}
+
+.post-date {
+    text-align: right;
+}
+
+.button-form {
+    float: left;
+    margin-right: 20px;
+}
+
+html,
+body {
+    height: 100%;
+    /* The html and body elements cannot have any padding or margin. */
+}
+
+/* Wrapper for page content to push down footer */
+#wrap {
+    min-height: 100%;
+    height: auto !important;
+    height: 100%;
+    /* Negative indent footer by it's height */
+    margin: 0 auto -100px;
+}
+
+/* Set the fixed height of the footer here */
+#push,
+#footer {
+    height: 90px;
+    max-width: 720px;
+    margin: auto;
+    clear: both;
+}
+
+.bottom-margin {
+    margin-bottom: 30px;
+}
+
+.left-margin {
+    margin-left: 15px;
+}
+
+.no-bottom-margin {
+    margin-bottom: 0 !important;
+}
+
+.no-top-margin {
+    margin-top: 0 !important;
+}
+
+.error .centered {
+    text-align: center;
+}
+
+.top-table {
+    border: 1px solid #e5e5e5;
+}
+
+.inline {
+    display: inline;
+}
+
+.masthead {
+    padding-top: 20px;
+}
+
+.one-line-iframe {
+    border: none;
+    height: 25px;
+    width: 100%;
+}
